@@ -6,6 +6,7 @@
  * @version 1.0
  * @since 02/09/2023
  */
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 public class Usuario {
@@ -17,13 +18,19 @@ public class Usuario {
      */
     public static void setValue(){
         Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
-        System.out.print("Digite o primeiro número: ");
-        number1 = scanner.nextDouble();
-        System.out.print("Qual a operação? [+,-,*,/,%]: ");
-        operator = scanner.next();
-        System.out.print("Digite o segundo número: ");
-        number2 = scanner.nextDouble();
-        scanner.close();
+        try {
+            System.out.print("Digite o primeiro número: ");
+            number1 = scanner.nextDouble();
+            System.out.print("Qual a operação? [+,-,*,/,%]: ");
+            operator = scanner.next();
+            System.out.print("Digite o segundo número: ");
+            number2 = scanner.nextDouble();
+        }catch (InputMismatchException e){
+            System.err.println("Entrada inválida. Certifique-se de usar o [.]");
+        }finally {
+            scanner.close();
+        }
+
     }
     /**
      * Obtém o primeiro número fornecido pelo usuário.
